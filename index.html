@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Number Converter</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Advanced Number Converter</h1>
+            <div class="theme-controls">
+                <button id="themeToggle" class="icon-button">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button id="colorPicker" class="icon-button">
+                    <i class="fas fa-palette"></i>
+                </button>
+                <input type="color" id="themeColor" value="#00ff00">
+            </div>
+        </header>
+
+        <div class="converter-box">
+            <div class="mode-selector">
+                <button class="mode-btn active" data-mode="basic">Basic Converter</button>
+                <button class="mode-btn" data-mode="bit">Bit Calculator</button>
+                <button class="mode-btn" data-mode="floating">Floating Point</button>
+                <button class="mode-btn" data-mode="ascii">ASCII/Unicode</button>
+            </div>
+
+            <!-- Basic Converter Section -->
+            <section id="basicSection" class="conversion-section active">
+                <div class="input-section">
+                    <div class="input-group">
+                        <label for="conversionType">From Base:</label>
+                        <select id="conversionType">
+                            <option value="binary">Binary</option>
+                            <option value="decimal">Decimal</option>
+                            <option value="octal">Octal</option>
+                            <option value="hex">Hexadecimal</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="inputNumber">Number:</label>
+                        <input type="text" id="inputNumber" placeholder="Enter number">
+                    </div>
+                    <div class="input-group">
+                        <label for="wordSize">Word Size:</label>
+                        <select id="wordSize">
+                            <option value="8">8 bits</option>
+                            <option value="16">16 bits</option>
+                            <option value="32">32 bits</option>
+                            <option value="64">64 bits</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="showSteps">Show Steps:</label>
+                        <input type="checkbox" id="showSteps">
+                    </div>
+                    <div class="input-group button-group">
+                        <label>&nbsp;</label>
+                        <button id="convertButton">Convert</button>
+                    </div>
+                </div>
+
+                <div class="results">
+                    <div class="result-box">
+                        <h3>Binary</h3>
+                        <div id="binaryResult" class="result">-</div>
+                    </div>
+                    <div class="result-box">
+                        <h3>Decimal</h3>
+                        <div id="decimalResult" class="result">-</div>
+                    </div>
+                    <div class="result-box">
+                        <h3>Octal</h3>
+                        <div id="octalResult" class="result">-</div>
+                    </div>
+                    <div class="result-box">
+                        <h3>Hexadecimal</h3>
+                        <div id="hexResult" class="result">-</div>
+                    </div>
+                    <div class="result-box">
+                        <h3>1's Complement</h3>
+                        <div id="onesComplement" class="result">-</div>
+                    </div>
+                    <div class="result-box">
+                        <h3>2's Complement</h3>
+                        <div id="twosComplement" class="result">-</div>
+                    </div>
+                </div>
+
+                <div id="conversionSteps" class="steps-section" style="display: none;">
+                    <h3>Conversion Steps</h3>
+                    <div id="stepsContent" class="steps-content"></div>
+                </div>
+            </section>
+
+            <!-- Bit Calculator Section -->
+            <section id="bitSection" class="conversion-section">
+                <div class="input-section">
+                    <div class="input-group">
+                        <label for="bitOp1">First Number:</label>
+                        <input type="text" id="bitOp1" placeholder="Enter binary number (e.g., 1010)">
+                    </div>
+                    <div class="input-group">
+                        <label for="bitOperation">Operation:</label>
+                        <select id="bitOperation">
+                            <option value="AND">AND (&)</option>
+                            <option value="OR">OR (|)</option>
+                            <option value="XOR">XOR (^)</option>
+                            <option value="NOT">NOT (~)</option>
+                            <option value="SHIFT_LEFT">Shift Left (<<)</option>
+                            <option value="SHIFT_RIGHT">Shift Right (>>)</option>
+                        </select>
+                    </div>
+                    <div class="input-group" id="secondNumberGroup">
+                        <label for="bitOp2">Second Number:</label>
+                        <input type="text" id="bitOp2" placeholder="Enter binary number">
+                    </div>
+                    <div class="input-group">
+                        <label for="bitWordSize">Word Size:</label>
+                        <select id="bitWordSize">
+                            <option value="8">8 bits</option>
+                            <option value="16">16 bits</option>
+                            <option value="32">32 bits</option>
+                            <option value="64">64 bits</option>
+                        </select>
+                    </div>
+                    <div class="input-group button-group">
+                        <label>&nbsp;</label>
+                        <button id="bitCalculator">Calculate</button>
+                    </div>
+                </div>
+
+                <div class="results">
+                    <div class="result-box">
+                        <h3>Binary Result</h3>
+                        <div id="bitResult" class="result">-</div>
+                    </div>
+                    <div class="result-box">
+                        <h3>Decimal Result</h3>
+                        <div id="bitDecimalResult" class="result">-</div>
+                    </div>
+                    <div class="result-box">
+                        <h3>Hexadecimal Result</h3>
+                        <div id="bitHexResult" class="result">-</div>
+                    </div>
+                    <div class="result-box">
+                        <h3>Operation Steps</h3>
+                        <div id="bitSteps" class="steps-content"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Floating Point Section -->
+            <section id="floatingSection" class="conversion-section">
+                <div class="input-section">
+                    <div class="input-group">
+                        <label for="ieeeInput">Enter Decimal Number:</label>
+                        <input type="number" id="ieeeInput" step="any" placeholder="Enter decimal number">
+                    </div>
+                    <div class="input-group">
+                        <label for="ieeePrecision">Precision:</label>
+                        <select id="ieeePrecision">
+                            <option value="single">Single (32-bit)</option>
+                            <option value="double">Double (64-bit)</option>
+                        </select>
+                    </div>
+                    <div class="input-group button-group">
+                        <label>&nbsp;</label>
+                        <button id="ieeeConvert">Convert to IEEE 754</button>
+                    </div>
+                </div>
+                <div class="ieee-results">
+                    <div class="result-card">
+                        <h3>IEEE 754 Representation</h3>
+                        <div class="ieee-result">
+                            <p><strong>Sign:</strong> <span id="ieeeSign">-</span></p>
+                            <p><strong>Exponent:</strong> <span id="ieeeExponent">-</span></p>
+                            <p><strong>Mantissa:</strong> <span id="ieeeMantissa">-</span></p>
+                            <p><strong>Binary:</strong> <span id="ieeeBinary">-</span></p>
+                            <p><strong>Hexadecimal:</strong> <span id="ieeeHex">-</span></p>
+                            <p><strong>Decimal:</strong> <span id="ieeeDecimal">-</span></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ASCII/Unicode Section -->
+            <section id="asciiSection" class="conversion-section">
+                <div class="input-section">
+                    <div class="input-group">
+                        <label for="asciiInput">Enter Text or Code:</label>
+                        <input type="text" id="asciiInput" placeholder="Enter text or ASCII/Unicode code">
+                    </div>
+                    <div class="input-group">
+                        <label for="asciiType">Conversion Type:</label>
+                        <select id="asciiType">
+                            <option value="text">Text to ASCII/Unicode</option>
+                            <option value="ascii">ASCII to Text</option>
+                            <option value="unicode">Unicode to Text</option>
+                        </select>
+                    </div>
+                    <div class="input-group button-group">
+                        <label>&nbsp;</label>
+                        <button id="asciiConvert">Convert</button>
+                    </div>
+                </div>
+                <div class="results">
+                    <div class="result-box">
+                        <h3>ASCII Codes</h3>
+                        <div id="asciiResult" class="result">-</div>
+                    </div>
+                    <div class="result-box">
+                        <h3>Unicode Codes</h3>
+                        <div id="unicodeResult" class="result">-</div>
+                    </div>
+                    <div class="result-box">
+                        <h3>Binary Representation</h3>
+                        <div id="asciiBinary" class="result">-</div>
+                    </div>
+                    <div class="result-box">
+                        <h3>Hexadecimal Representation</h3>
+                        <div id="asciiHex" class="result">-</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- History Section -->
+            <div class="history-section">
+                <h3>Recent Conversions</h3>
+                <div id="conversionHistory" class="history-list"></div>
+            </div>
+        </div>
+
+        <div class="export-section">
+            <button onclick="exportResults()" class="export-btn">
+                <i class="fas fa-download"></i> Export Results
+            </button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html> 
